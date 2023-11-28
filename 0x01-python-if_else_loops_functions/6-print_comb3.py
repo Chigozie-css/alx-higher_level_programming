@@ -5,4 +5,4 @@ for a in range(0, 8):
         print("{:d}{:d}".format(a, b), end=", ")
 a += 1
 b -= 1
-print("{:d}{:d}".format(a, b), end="\n")
+print("{:d}{:d}".format(a, b + 1), end="\n")
