@@ -2,4 +2,4 @@
 for alphabet in range(97, 123):
     if chr(alphabet) in {"q", "e"}:
         continue
-    print(chr(alphabet), end="")
+    print("{}".format(chr(alphabet)), end="")
