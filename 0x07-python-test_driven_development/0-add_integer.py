@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 This module contains a function that adds two integers.
 
@@ -35,10 +36,10 @@ if __name__ == "__main__":
 
     try:
         print(add_integer(4, "School"))
-    except Exception as e:
+    except TypeError as e:
         print(e)
 
     try:
         print(add_integer(None))
-    except Exception as e:
+    except TypeError as e:
         print(e)
