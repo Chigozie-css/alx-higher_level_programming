@@ -27,10 +27,12 @@
 # Case 2: Not defined object
 >>> MyList = __import__('1-my_list').MyList
 >>> my_list2 = MyList()
->>> my_list2.print_sorted()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'my_list2' is not defined
+>>> try:
+...     my_list2.print_sorted()
+... except Exception as e:
+...     print(e)
+...
+name 'my_list2' is not defined
 >>>
 
 -------------------------------------------
@@ -78,10 +80,12 @@ NameError: name 'my_list2' is not defined
 
 # Case 7: Parent object
 >>> my_list = [1, 2, 3]
->>> my_list.print_sorted()
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-AttributeError: 'list' object has no attribute 'print_sorted'
+>>> try:
+...     my_list.print_sorted()
+... except Exception as e:
+...     print(e)
+...
+'list' object has no attribute 'print_sorted'
 >>>
 
 -------------------------------------------
