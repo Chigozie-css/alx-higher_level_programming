@@ -22,6 +22,8 @@ class Rectangle(Base):
         self.height = height
         self.x = x
         self.y = y
+        """Rectangle dictionary"""
+        self.id = id if id is not None else 0
 
     @property
     def width(self):
@@ -106,6 +108,16 @@ class Rectangle(Base):
             for key, value in kwargs.items():
                 setattr(self, key, value)
 
+    def to_dictionary(self):
+        """Return dictionary representation of the rectangle."""
+        return {
+                "id": self.id,
+                "width": self.width,
+                "height": self.height,
+                "x": self.x,
+                "y": self.y
+            }
+
         """if len(args) > 0:
             self.id = args[0]
         if len(args) > 1:
@@ -117,7 +129,53 @@ class Rectangle(Base):
         if len(args) > 4:
             self.y = args[4]"""
 
+        """Checking"""
+    @staticmethod
+    def save_to_file(list_objs):
+        """
+        Write the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): List of Rectangle instances.
+        """
+        filename = "Rectangle.json"
+        json_list = [obj.to_dictionary() for obj in list_objs]
+        with open(filename, 'w') as file:
+            file.write(Base.to_json_string(json_list))
+
+    """Checking-2"""
+    @classmethod
+    def load_from_file(cls):
+        """
+        Return a list of Rectangle instances loaded from file.
+
+        Returns:
+            list: List of Rectangle instances loaded from file.
+        """
+        filename = "Rectangle.json"
+        try:
+            with open(filename, 'r') as file:
+                json_string = file.read()
+                list_dicts = Base.from_json_string(json_string)
+                return [cls.create(**dict) for dict in list_dicts]
+        except FileNotFoundError:
+            return []
+
 if __name__ == "__main__":
+
+    """Rectangle dictionary"""
+    r1 = Rectangle(10, 2, 1, 9)
+    print(r1)
+
+    r1_dictionary = r1.to_dictionary()
+    print(r1_dictionary)
+    print(type(r1_dictionary))
+
+    r2 = Rectangle(1, 1)
+    print(r2)
+    r2.update(**r1_dictionary)
+    print(r2)
+    print(r1 == r2)
 
     """Update the attributes"""
     r1 = Rectangle(10, 10, 10, 10)
