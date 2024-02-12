@@ -2,6 +2,7 @@
 """Module defining the Base class."""
 
 import json
+import csv
 
 class Base:
     """Base class."""
@@ -85,6 +86,60 @@ class Base:
                 return [cls.create(**dict) for dict in list_dicts]
         except FileNotFoundError:
             return []
+
+    @classmethod
+    def save_to_file(cls, list_objs):
+        """
+        Write the JSON string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): List of instances who inherits of Base.
+        """
+        filename = cls.__name__ + ".json"
+        json_list = [obj.to_dictionary() for obj in list_objs]
+        with open(filename, 'w') as file:
+            file.write(cls.to_json_string(json_list))
+
+    @classmethod
+    def save_to_file_csv(cls, list_objs):
+        """
+        Write the CSV string representation of list_objs to a file.
+
+        Args:
+            list_objs (list): List of instances who inherits of Base.
+        """
+        filename = cls.__name__ + ".csv"
+        with open(filename, 'w', newline='') as file:
+            writer = csv.writer(file)
+            for obj in list_objs:
+                if cls.__name__ == "Rectangle":
+                    writer.writerow([obj.id, obj.width, obj.height, obj.x, obj.y])
+                elif cls.__name__ == "Square":
+                    writer.writerow([obj.id, obj.size, obj.x, obj.y])
+
+    @classmethod
+    def load_from_file_csv(cls):
+        """
+        Return a list of instances from a CSV file.
+
+        Returns:
+            list: List of instances.
+        """
+        filename = cls.__name__ + ".csv"
+        try:
+            with open(filename, 'r', newline='') as file:
+                reader = csv.reader(file)
+                instances = []
+                for row in reader:
+                    if cls.__name__ == "Rectangle":
+                        instance = cls(int(row[1]), int(row[2]), int(row[3]), int(row[4]), int(row[0]))
+                    elif cls.__name__ == "Square":
+                        instance = cls(int(row[1]), int(row[2]), int(row[3]), int(row[0]))
+                    instances.append(instance)
+                return instances
+        except FileNotFoundError:
+            return []
+
 
 if __name__ == "__main__":
     # Example usage of Base class
