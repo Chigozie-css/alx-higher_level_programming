@@ -2,7 +2,10 @@
 -- Records are ordered by ascending show title.
 SELECT DISTINCT t.`title`
 FROM `tv_shows` AS t
-LEFT JOIN `tv_show_genres` AS s ON t.`id` = s.`show_id`
-LEFT JOIN `tv_genres` AS g ON s.`genre_id` = g.`id` AND g.`name` = "Comedy"
-WHERE g.`id` IS NULL
+WHERE t.`id` NOT IN (
+    SELECT s.`show_id`
+    FROM `tv_show_genres` AS s
+    INNER JOIN `tv_genres` AS g ON s.`genre_id` = g.`id`
+    WHERE g.`name` = "Comedy"
+)
 ORDER BY t.`title`;
