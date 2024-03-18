@@ -6,19 +6,19 @@ def safe_print_integer_err(value):
     """
     Safely prints an integer.
 
-    Attempts to print the provided integer value using "{:d}".format().
-    If successful, returns True. If an error occurs (TypeError or ValueError),
-    prints an error message to stderr and returns False.
+    Tries to print the value as an integer followed by a newline.
+    If successful, returns True; if not (due to TypeError or ValueError),
+    prints an error message to stderr starting with "Exception:" and returns False.
 
     Args:
-        value (int): The integer value to print.
+        value: The value to print.
 
     Returns:
         bool: True if printing succeeds, False otherwise.
     """
     try:
-        print("{:d}".format(value))
+        print("{:d}".format(int(value)))
         return True
     except (TypeError, ValueError) as e:
-        print(f"Error: {e}", file=sys.stderr)
+        print(f"Exception: {e}", file=sys.stderr)
         return False
