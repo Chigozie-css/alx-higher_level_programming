@@ -20,14 +20,26 @@ def list_division(my_list_1, my_list_2, list_length):
         try:
             div = my_list_1[i] / my_list_2[i]
         except TypeError:
-            print("Element at index {} is not a number. Setting division result to 0.".format(i))
+            print("wrong type")
             div = 0
         except ZeroDivisionError:
-            print("Division by 0 at index {}. Setting division result to 0.".format(i))
+            print("division by 0")
             div = 0
         except IndexError:
-            print("Index out of range for index {}. Setting division result to 0.".format(i))
+            print("out of range")
             div = 0
         finally:
             result_list.append(div)
     return result_list
+
+my_l_1 = [10, 8, 4]
+my_l_2 = [2, 4, 4]
+result = list_division(my_l_1, my_l_2, max(len(my_l_1), len(my_l_2)))
+print(result)
+
+print("--")
+
+my_l_1 = [10, 8, 4, 4]
+my_l_2 = [2, 0, "H", 2, 7]
+result = list_division(my_l_1, my_l_2, max(len(my_l_1), len(my_l_2)))
+print(result)
