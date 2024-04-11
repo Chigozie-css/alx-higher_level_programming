@@ -1,5 +1,7 @@
 #!/usr/bin/node
-// This function adds two numbers and prints the result.
+/*
+ This function adds two numbers and prints the result.
+*/
 function add(a, b) {
   const c = a + b;
   console.log(c);
