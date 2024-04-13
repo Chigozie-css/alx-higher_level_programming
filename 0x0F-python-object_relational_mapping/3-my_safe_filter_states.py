@@ -6,15 +6,11 @@ import sys
 
 if __name__ == "__main__":
     """ Establishing a connection to MySQL and accessing the database """
-    db = MySQLdb.connect(
-        host="localhost",
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306
-    )
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                        passwd=sys.argv[2], db=sys.argv[3], port=3306)
+
     cur = db.cursor()
-    """ Executing a parameterized query to select states matching the given name """
+    """Executing a parameterized query to select states matching the given name"""
     match = sys.argv[4]
     cur.execute("SELECT * FROM states WHERE name LIKE %s", (match, ))
     rows = cur.fetchall()
