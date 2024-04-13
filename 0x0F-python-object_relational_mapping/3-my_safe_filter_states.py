@@ -3,9 +3,7 @@
 import MySQLdb
 import sys
 
-
 if __name__ == "__main__":
-    """Establishing a connection to MySQL and accessing the database"""
     db = MySQLdb.connect(
         host="localhost",
         user=sys.argv[1],
@@ -14,7 +12,6 @@ if __name__ == "__main__":
         port=3306
     )
     cur = db.cursor()
-    """Performing a parameterized query to select states matching the given name"""
     state_name = sys.argv[4]
     query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
     cur.execute(query, (state_name,))
