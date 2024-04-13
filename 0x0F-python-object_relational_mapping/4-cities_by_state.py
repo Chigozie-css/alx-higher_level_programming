@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Lists all cities and their respective states from the database hbtn_0e_0_usa."""
+"""Lists all cities from the database hbtn_0e_4_usa."""
 import MySQLdb
 import sys
 
@@ -14,9 +14,8 @@ if __name__ == "__main__":
         port=3306
     )
     cur = db.cursor()
-    """ Executing a query to select cities and their respective states """
-    cur.execute("""SELECT cities.id, cities.name, states.name FROM
-                cities INNER JOIN states ON states.id=cities.state_id""")
+    """ Executing a query to select all cities sorted by cities.id """
+    cur.execute("""SELECT * FROM cities ORDER BY cities.id ASC""")
     rows = cur.fetchall()
     for row in rows:
         print(row)
