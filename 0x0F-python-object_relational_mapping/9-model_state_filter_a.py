@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Prints the first State object from the database hbtn_0e_6_usa."""
+"""Prints the first State object with a name containing 'a' from the database hbtn_0e_6_usa."""
 import sys
 from model_state import Base, State
 from sqlalchemy import create_engine
@@ -14,9 +14,6 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
     
-    """Query the first State object from the database."""
-    instance = session.query(State).first()
-    if instance is None:
-        print("Nothing")
-    else:
+    """Query the first State object with a name containing 'a'."""
+    for instance in session.query(State).filter(State.name.like('%a%')):
         print(instance.id, instance.name, sep=": ")
