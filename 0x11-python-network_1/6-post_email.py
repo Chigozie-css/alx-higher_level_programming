@@ -10,4 +10,4 @@ if __name__ == "__main__":
 
     data = {"email": email}
     response = requests.post(url, data=data)
-    print("Your email is:", response.text.strip())
+    print(response.text.strip())
