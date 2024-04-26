@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Sends a POST request to search for a user with a letter parameter."""
+"""Sends a POST request to search for a user."""
 
 import sys
 import requests
