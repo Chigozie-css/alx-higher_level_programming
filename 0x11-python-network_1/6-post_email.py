@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""Fetches the value of the X-Request-Id header variable from a request to a given URL."""
+"""Sends a POST request to a URL with an email parameter and displays the response body."""
 
 import sys
-import urllib.request
+import requests
 
 if __name__ == "__main__":
     url = sys.argv[1]
+    email = sys.argv[2]
 
-    request = urllib.request.Request(url)
-    with urllib.request.urlopen(request) as response:
-        print(dict(response.headers).get("X-Request-Id"))
+    data = {"email": email}
+    response = requests.post(url, data=data)
+    print("Your email is:", response.text.strip())
